@@ -8,14 +8,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Entity
-@NoArgsConstructor
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "cpu")
-public class CpuUsage {
+public class Cpu {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,5 +32,8 @@ public class CpuUsage {
 	@Column(name = "cpu_usage")
 	private Double usage;
 
-
+	public Cpu(Double cpuUsage) {
+		this.usage = cpuUsage;
+		this.time = LocalDateTime.now();
+	}
 }
