@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class CpuUsageScheduler {
-	private static final long delay = 6000L;
+	private final long delay = 60000L;
 
 	private final CpuService cpuService;
 	private final CpuRepository cpuRepository;
