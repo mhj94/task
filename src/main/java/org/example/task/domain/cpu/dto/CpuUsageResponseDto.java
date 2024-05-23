@@ -11,7 +11,6 @@ import lombok.Setter;
 @Getter
 public class CpuUsageResponseDto {
 
-	private Long id;
 	private LocalDateTime time;
 	private Double usage;
 

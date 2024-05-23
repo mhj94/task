@@ -40,27 +40,29 @@ public class CpuService {
 	}
 
 	// 지정시간 분단위 조회
-	public List<CpuUsageResponseDto> getCpuUsageListByMinutes(LocalDateTime start, LocalDateTime end) {
+	public List<CpuUsageResponseDto> getCpuUsageListByMinutes(LocalDateTime startTime, LocalDateTime endTime) {
 
-		List<Cpu> cpuUsageList = cpuRepository.findAllByTimeBetween(start, end);
+		List<Cpu> cpuUsageList = cpuRepository.findAllByTimeBetween(startTime, endTime);
 		return cpuUsageList.stream().map(CpuUsageResponseDto::new).toList();
 	}
 
 	// 지정날짜 시간단위 조회(최소/최대/평균)
-	public List<CpuUsageStatisticResponseDto> getCpuUsageStatisticsListByHours(LocalDate startDay, LocalDate endDay) {
+	public List<CpuUsageStatisticResponseDto> getCpuUsageStatisticsListByHours(LocalDate startDate, LocalDate endDate) {
 
-		LocalDateTime resetStartDay = startDay.atStartOfDay();
-		LocalDateTime resetEndDay = endDay.atTime(23, 59, 59, 999999999);
+		// 해당일과 지정일 범위 초기화
+		LocalDateTime resetStartDate = startDate.atStartOfDay();
+		LocalDateTime restEndDate = endDate.atTime(23, 59, 59, 999999999);
 
-		return cpuRepository.findCpuUsageStatisticsListByHourBetween(resetStartDay, resetEndDay);
+		return cpuRepository.findCpuUsageStatisticsListByHourBetween(resetStartDate, restEndDate);
 	}
 
 	// 지정날짜 일단위 조회(최소/최대/평균)
-	public List<CpuUsageStatisticResponseDto> getCpuUsageStatisticsListByDay(LocalDate startDay, LocalDate endDay) {
+	public List<CpuUsageStatisticResponseDto> getCpuUsageStatisticsListByDay(LocalDate startDate, LocalDate endDate) {
 
-		LocalDateTime resetStartDay = startDay.atStartOfDay();
-		LocalDateTime resetEndDay = endDay.atTime(23, 59, 59, 999999999);
+		// 해당일과 지정일 범위 초기화
+		LocalDateTime resetStartDate = startDate.atStartOfDay();
+		LocalDateTime restEndDate = endDate.atTime(23, 59, 59, 999999999);
 
-		return cpuRepository.findCpuUsageStatisticsListByDayBetween(resetStartDay, resetEndDay);
+		return cpuRepository.findCpuUsageStatisticsListByDayBetween(resetStartDate, restEndDate);
 	}
 }

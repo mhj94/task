@@ -7,19 +7,18 @@ import org.example.task.domain.cpu.dto.CpuUsageStatisticResponseDto;
 import org.example.task.domain.cpu.entity.Cpu;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 public interface CpuRepository extends JpaRepository<Cpu, Long> {
 
-	List<Cpu> findAllByTimeBetween(LocalDateTime start, LocalDateTime end);
+	List<Cpu> findAllByTimeBetween(LocalDateTime startTime, LocalDateTime endTime);
 
 	@Query("SELECT new org.example.task.domain.cpu.dto.CpuUsageStatisticResponseDto(" +
 		"MIN(c.usage), MAX(c.usage), AVG(c.usage)) " +
 		"FROM Cpu c " +
-		"WHERE c.time BETWEEN :start AND :end " +
+		"WHERE c.time BETWEEN :startDate AND :endDate " +
 		"GROUP BY FUNCTION('DAY', c.time), FUNCTION('HOUR', c.time) " +
 		"ORDER BY FUNCTION('DAY', c.time), FUNCTION('HOUR', c.time)")
-	List<CpuUsageStatisticResponseDto> findCpuUsageStatisticsListByHourBetween(LocalDateTime start, LocalDateTime end);
+	List<CpuUsageStatisticResponseDto> findCpuUsageStatisticsListByHourBetween(LocalDateTime startDate, LocalDateTime endDate);
 
 	@Query("SELECT new org.example.task.domain.cpu.dto.CpuUsageStatisticResponseDto(" +
 		"MIN(c.usage), MAX(c.usage), AVG(c.usage))" +
