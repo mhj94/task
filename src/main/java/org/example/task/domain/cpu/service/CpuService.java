@@ -1,5 +1,6 @@
 package org.example.task.domain.cpu.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -46,11 +47,20 @@ public class CpuService {
 	}
 
 	// 지정날짜 시간단위 조회(최소/최대/평균)
-	public List<CpuUsageStatisticResponseDto> getCpuUsageStatisticsListByHours(LocalDateTime start, LocalDateTime end) {
+	public List<CpuUsageStatisticResponseDto> getCpuUsageStatisticsListByHours(LocalDate startDay, LocalDate endDay) {
 
-		LocalDateTime startDate = start.withHour(0).withMinute(0).withSecond(0).withNano(0);
-		LocalDateTime endDate = end.plusDays(1).withHour(0).withMinute(0).withSecond(0).withNano(0);
+		LocalDateTime resetStartDay = startDay.atStartOfDay();
+		LocalDateTime resetEndDay = endDay.atTime(23, 59, 59, 999999999);
 
-		return cpuRepository.findCpuUsageStatisticsListByTimeBetween(startDate, endDate);
+		return cpuRepository.findCpuUsageStatisticsListByHourBetween(resetStartDay, resetEndDay);
+	}
+
+	// 지정날짜 일단위 조회(최소/최대/평균)
+	public List<CpuUsageStatisticResponseDto> getCpuUsageStatisticsListByDay(LocalDate startDay, LocalDate endDay) {
+
+		LocalDateTime resetStartDay = startDay.atStartOfDay();
+		LocalDateTime resetEndDay = endDay.atTime(23, 59, 59, 999999999);
+
+		return cpuRepository.findCpuUsageStatisticsListByDayBetween(resetStartDay, resetEndDay);
 	}
 }

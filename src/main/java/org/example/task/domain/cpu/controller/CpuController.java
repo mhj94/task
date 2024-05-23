@@ -1,5 +1,6 @@
 package org.example.task.domain.cpu.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,18 +24,26 @@ public class CpuController {
 	private final CpuService cpuService;
 
 	@GetMapping("/minutes")
-	public ResponseEntity<List<CpuUsageResponseDto>> getCpuUsageByMinutes(@RequestParam("start") LocalDateTime start,
-		@RequestParam("end")LocalDateTime end) {
+	public ResponseEntity<List<CpuUsageResponseDto>> getCpuUsageByMinutes(@RequestParam("start") LocalDateTime startTime,
+		@RequestParam("end")LocalDateTime endTime) {
 
-		List<CpuUsageResponseDto> cpuUsageResponseDtoList = cpuService.getCpuUsageListByMinutes(start, end);
+		List<CpuUsageResponseDto> cpuUsageResponseDtoList = cpuService.getCpuUsageListByMinutes(startTime, endTime);
 		return ResponseEntity.ok(cpuUsageResponseDtoList);
 	}
 
 	@GetMapping("/hours")
-	public ResponseEntity<List<CpuUsageStatisticResponseDto>> getCpuUsageStatisticsListByHours(@RequestParam("start") LocalDateTime start, @RequestParam("end") LocalDateTime end) {
+	public ResponseEntity<List<CpuUsageStatisticResponseDto>> getCpuUsageStatisticsListByHours(@RequestParam("start") LocalDate startDay, @RequestParam("end") LocalDate endDay) {
 
 		List<CpuUsageStatisticResponseDto> cpuUsageStatisticsResponseDtoList = cpuService.getCpuUsageStatisticsListByHours(
-			start, end);
+			startDay, endDay);
+		return ResponseEntity.ok(cpuUsageStatisticsResponseDtoList);
+	}
+
+	@GetMapping("/days")
+	public ResponseEntity<List<CpuUsageStatisticResponseDto>> getCpuUsageStatisticsListByDay(@RequestParam("start") LocalDate startDay, @RequestParam("end") LocalDate endDay) {
+
+		List<CpuUsageStatisticResponseDto> cpuUsageStatisticsResponseDtoList = cpuService.getCpuUsageStatisticsListByDay(
+			startDay, endDay);
 		return ResponseEntity.ok(cpuUsageStatisticsResponseDtoList);
 	}
 
