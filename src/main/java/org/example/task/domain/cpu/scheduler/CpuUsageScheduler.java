@@ -1,7 +1,5 @@
 package org.example.task.domain.cpu.scheduler;
 
-import org.example.task.domain.cpu.entity.Cpu;
-import org.example.task.domain.cpu.repository.CpuRepository;
 import org.example.task.domain.cpu.service.CpuService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

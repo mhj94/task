@@ -8,15 +8,19 @@ import org.example.task.domain.cpu.dto.CpuUsageResponseDto;
 import org.example.task.domain.cpu.dto.CpuUsageStatisticResponseDto;
 import org.example.task.domain.cpu.entity.Cpu;
 import org.example.task.domain.cpu.repository.CpuRepository;
+import org.example.task.exception.GlobalException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.HardwareAbstractionLayer;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CpuService {
 
 	private final CpuRepository cpuRepository;
@@ -32,13 +36,15 @@ public class CpuService {
 
 		try {
 			Thread.sleep(1000);
+			// 초기 사용량에 대한 사용률
+			return centralProcessor.getSystemCpuLoadBetweenTicks(previousTicks) * 100;
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			log.error("쓰레드 오류 발생", e);
+			throw new GlobalException("CPU 사용량 수집 실패", e);
 		}
-		// 초기 사용량에 대한 사용률
-		return centralProcessor.getSystemCpuLoadBetweenTicks(previousTicks) * 100;
 	}
 
+	@Transactional
 	public void saveCpuUsage() {
 		cpuRepository.save(new Cpu(getCpuUsage()));
 	}
