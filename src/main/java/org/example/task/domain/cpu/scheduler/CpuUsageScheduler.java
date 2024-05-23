@@ -17,7 +17,7 @@ public class CpuUsageScheduler {
 	private final CpuService cpuService;
 	private final CpuRepository cpuRepository;
 
-	//@Scheduled(fixedDelay = delay)
+	@Scheduled(fixedDelay = delay)
 	@Transactional
 	public void collectCpuUsage() {
 		cpuRepository.save(new Cpu(cpuService.getCpuUsage()));
