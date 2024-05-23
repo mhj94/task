@@ -21,7 +21,11 @@ public interface CpuRepository extends JpaRepository<Cpu, Long> {
 		"ORDER BY FUNCTION('DAY', c.time), FUNCTION('HOUR', c.time)")
 	List<CpuUsageStatisticResponseDto> findCpuUsageStatisticsListByHourBetween(LocalDateTime start, LocalDateTime end);
 
-	@Query("SELECT new org.example.task.domain.cpu.dto.CpuUsageStatisticResponseDto(MIN(c.usage), MAX(c.usage), AVG(c.usage))" +
-		"FROM Cpu c WHERE c.time BETWEEN :startDate AND :endDate GROUP BY FUNCTION('DAY', c.time)")
+	@Query("SELECT new org.example.task.domain.cpu.dto.CpuUsageStatisticResponseDto(" +
+		"MIN(c.usage), MAX(c.usage), AVG(c.usage))" +
+		"FROM Cpu c " +
+		"WHERE c.time BETWEEN :startDate AND :endDate " +
+		"GROUP BY FUNCTION('MONTH', c.time), FUNCTION('DAY', c.time) " +
+		"ORDER BY FUNCTION('MONTH', c.time), FUNCTION('DAY', c.time)")
 	List<CpuUsageStatisticResponseDto> findCpuUsageStatisticsListByDayBetween(LocalDateTime startDate, LocalDateTime endDate);
 }
