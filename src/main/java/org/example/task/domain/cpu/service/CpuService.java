@@ -39,6 +39,9 @@ public class CpuService {
 		return centralProcessor.getSystemCpuLoadBetweenTicks(previousTicks) * 100;
 	}
 
+	public void saveCpuUsage() {
+		cpuRepository.save(new Cpu(getCpuUsage()));
+	}
 	// 지정시간 분단위 조회
 	public List<CpuUsageResponseDto> getCpuUsageListByMinutes(LocalDateTime startTime, LocalDateTime endTime) {
 
