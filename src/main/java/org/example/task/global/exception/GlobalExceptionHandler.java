@@ -1,4 +1,4 @@
-package org.example.task.exception;
+package org.example.task.global.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

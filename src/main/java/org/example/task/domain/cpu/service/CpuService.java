@@ -8,7 +8,7 @@ import org.example.task.domain.cpu.dto.CpuUsageResponseDto;
 import org.example.task.domain.cpu.dto.CpuUsageStatisticResponseDto;
 import org.example.task.domain.cpu.entity.Cpu;
 import org.example.task.domain.cpu.repository.CpuRepository;
-import org.example.task.exception.GlobalException;
+import org.example.task.global.exception.GlobalException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
