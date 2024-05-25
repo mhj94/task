@@ -66,7 +66,7 @@ public class CpuService {
 	}
 
 	// 지정날짜 일단위 조회(최소/최대/평균)
-	public List<CpuUsageStatisticResponseDto> getCpuUsageStatisticsListByDay(LocalDate startDate, LocalDate endDate) {
+	public List<CpuUsageStatisticResponseDto> getCpuUsageStatisticsListByDays(LocalDate startDate, LocalDate endDate) {
 
 		// 해당일과 지정일 범위 초기화
 		LocalDateTime resetStartDate = startDate.atStartOfDay();

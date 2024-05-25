@@ -27,7 +27,7 @@ public class CpuController {
 
 	@GetMapping("/minutes")
 	@Operation(summary = "분 단위 통계", description = "최근 1주간의 데이터를 분 단위로 제공합니다.")
-	public ResponseEntity<List<CpuUsageResponseDto>> getCpuUsageByMinutes(@RequestParam("start") LocalDateTime startTime,
+	public ResponseEntity<List<CpuUsageResponseDto>> getCpuUsageListByMinutes(@RequestParam("start") LocalDateTime startTime,
 		@RequestParam("end")LocalDateTime endTime) {
 
 		List<CpuUsageResponseDto> cpuUsageResponseDtoList = cpuService.getCpuUsageListByMinutes(startTime, endTime);
@@ -36,19 +36,19 @@ public class CpuController {
 
 	@GetMapping("/hours")
 	@Operation(summary = "시 단위 통계", description = "최근 3달간의 데이터를 시 단위로 제공합니다.")
-	public ResponseEntity<List<CpuUsageStatisticResponseDto>> getCpuUsageStatisticsListByHours(@RequestParam("start") LocalDate startDay, @RequestParam("end") LocalDate endDay) {
+	public ResponseEntity<List<CpuUsageStatisticResponseDto>> getCpuUsageStatisticsListByHours(@RequestParam("start") LocalDate startDate, @RequestParam("end") LocalDate endDate) {
 
 		List<CpuUsageStatisticResponseDto> cpuUsageStatisticsResponseDtoList = cpuService.getCpuUsageStatisticsListByHours(
-			startDay, endDay);
+			startDate, endDate);
 		return ResponseEntity.ok(cpuUsageStatisticsResponseDtoList);
 	}
 
 	@GetMapping("/days")
 	@Operation(summary = "일 단위 통계", description = "최근 1년간의 데이터를 일 단위로 제공합니다.")
-	public ResponseEntity<List<CpuUsageStatisticResponseDto>> getCpuUsageStatisticsListByDay(@RequestParam("start") LocalDate startDay, @RequestParam("end") LocalDate endDay) {
+	public ResponseEntity<List<CpuUsageStatisticResponseDto>> getCpuUsageStatisticsListByDay(@RequestParam("start") LocalDate startDate, @RequestParam("end") LocalDate endDate) {
 
-		List<CpuUsageStatisticResponseDto> cpuUsageStatisticsResponseDtoList = cpuService.getCpuUsageStatisticsListByDay(
-			startDay, endDay);
+		List<CpuUsageStatisticResponseDto> cpuUsageStatisticsResponseDtoList = cpuService.getCpuUsageStatisticsListByDays(
+			startDate, endDate);
 		return ResponseEntity.ok(cpuUsageStatisticsResponseDtoList);
 	}
 

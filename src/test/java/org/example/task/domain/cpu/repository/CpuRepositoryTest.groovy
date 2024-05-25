@@ -1,10 +1,9 @@
 package org.example.task.domain.cpu.repository
 
-import org.example.task.TaskApplication
+
 import org.example.task.domain.cpu.dto.CpuUsageStatisticResponseDto
 import org.example.task.domain.cpu.entity.Cpu
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
 import java.time.LocalDateTime
