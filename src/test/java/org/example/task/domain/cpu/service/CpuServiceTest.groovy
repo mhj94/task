@@ -57,8 +57,8 @@ class CpuServiceTest extends Specification {
         ]
 
         cpuRepository.findAllByTimeBetween(startTime, endTime) >> cpuList
-        def expectedResult = cpuList.collect {cpu ->
-          return new CpuUsageResponseDto(cpu)
+        def expectedResult = cpuList.collect { cpu ->
+            return new CpuUsageResponseDto(cpu)
         }
 
         when:
@@ -78,7 +78,7 @@ class CpuServiceTest extends Specification {
         def startDate = LocalDate.now().minusDays(1)
         def endDate = LocalDate.now()
         def statisticList = [
-                new CpuUsageStatisticResponseDto(10.0, 50.0,30.0)
+                new CpuUsageStatisticResponseDto(24, 05, 23, 13, 10.0, 50.0, 30.0)
         ]
 
         cpuRepository.findCpuUsageStatisticsListByHourBetween(startDate.atStartOfDay(),
@@ -96,14 +96,14 @@ class CpuServiceTest extends Specification {
         def startDate = LocalDate.now().minusDays(7)
         def endDate = LocalDate.now()
         def statisticList = [
-                new CpuUsageStatisticResponseDto(5.0,10.0, 30)
+                new CpuUsageStatisticResponseDto(24, 05, 23, 5.0, 10.0, 30)
         ]
 
         cpuRepository.findCpuUsageStatisticsListByDayBetween(startDate.atStartOfDay(),
                 endDate.atTime(23, 59, 59, 999999999)) >> statisticList
 
         when:
-        def result = cpuService.getCpuUsageStatisticsListByDay(startDate, endDate)
+        def result = cpuService.getCpuUsageStatisticsListByDays(startDate, endDate)
 
         then:
         result == statisticList

@@ -56,8 +56,8 @@ class CpuControllerTest extends Specification {
         def startDate = LocalDate.now().minusMonths(3)
         def endDate = LocalDate.now()
         def cpuUsageStatisticsResponseDtoList = [
-                new CpuUsageStatisticResponseDto(10.0, 20.0, 5 ),
-                new CpuUsageStatisticResponseDto(5,10,5)
+                new CpuUsageStatisticResponseDto(24, 05, 23, 13, 10.0, 20.0, 5),
+                new CpuUsageStatisticResponseDto(24, 05, 23, 14, 5, 10, 5)
         ]
         cpuService.getCpuUsageStatisticsListByHours(startDate, endDate) >> cpuUsageStatisticsResponseDtoList
 
@@ -77,8 +77,8 @@ class CpuControllerTest extends Specification {
         def startDate = LocalDate.now().minusYears(1)
         def endDate = LocalDate.now()
         def cpuUsageStatisticsResponseDtoList = [
-                new CpuUsageStatisticResponseDto(5.0, 20.0, 5.0),
-                new CpuUsageStatisticResponseDto(10.0,10.0,10.0)
+                new CpuUsageStatisticResponseDto(24, 05, 23, 5.0, 20.0, 5.0),
+                new CpuUsageStatisticResponseDto(24, 05, 23, 10.0, 10.0, 10.0)
         ]
         cpuService.getCpuUsageStatisticsListByDays(startDate, endDate) >> cpuUsageStatisticsResponseDtoList
 

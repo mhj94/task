@@ -52,8 +52,8 @@ class CpuRepositoryTest extends Specification {
         def startDate = LocalDateTime.of(2024, 5, 20, 0, 0)
         def endDate = LocalDateTime.of(2024, 5, 25, 23, 59)
         def cpuList = [
-                new CpuUsageStatisticResponseDto(20.0, 50.0, 35.0),
-                new CpuUsageStatisticResponseDto(25.0, 55.0, 40.0)
+                new CpuUsageStatisticResponseDto(24, 05, 23, 13, 20.0, 50.0, 35.0),
+                new CpuUsageStatisticResponseDto(24, 05, 23, 14, 25.0, 55.0, 40.0)
         ]
         cpuRepository.findCpuUsageStatisticsListByHourBetween(startDate, endDate) >> cpuList
 
@@ -71,8 +71,8 @@ class CpuRepositoryTest extends Specification {
         def startDate = LocalDateTime.of(2024, 5, 20, 0, 0)
         def endDate = LocalDateTime.of(2024, 5, 25, 23, 59)
         def cpuList = [
-                new CpuUsageStatisticResponseDto(10, 40, 30),
-                new CpuUsageStatisticResponseDto(20, 60, 40)
+                new CpuUsageStatisticResponseDto(24, 05, 23, 10, 40, 30),
+                new CpuUsageStatisticResponseDto(24, 05, 23, 20, 60, 40)
         ]
         cpuRepository.findCpuUsageStatisticsListByDayBetween(startDate, endDate) >> cpuList
 
