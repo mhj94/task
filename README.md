@@ -10,7 +10,7 @@
 - 개발 및 테스트 : H2 DB 사용
 - 운용 : Maria DB 사용
   
-  2.1 application.yml
+- application.yml
   - 로컬 포트 : 8080
   - 개발 및 테스트 : local
   - 운용 : prod
