@@ -2,7 +2,6 @@
 
 ### 프로젝트 설정 ###
 
-
 - Spring Boot 사용
 - Gradle 사용
 - Java 17 사용
